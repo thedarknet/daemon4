@@ -3,6 +3,8 @@ language: go
 go:
   - 1.7.1
 
+install: true
+
 script:
   - ./build/build-daemon.sh
 
