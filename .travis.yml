@@ -6,5 +6,5 @@ go:
 install: true
 
 script:
-  - build/build-daemon.sh
+  - scripts/build-daemon.sh
 
