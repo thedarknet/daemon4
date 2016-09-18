@@ -1,0 +1,5 @@
+GRANT USAGE ON SCHEMA static TO darknet_user;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA static TO darknet_user;
+
+GRANT USAGE ON SCHEMA live TO darknet_user;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA live TO darknet_user;

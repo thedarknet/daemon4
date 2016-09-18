@@ -1,0 +1,3 @@
+GRANT USAGE ON SCHEMA badge TO badge_user;
+GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA badge TO badge_user;
+

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    
+    <xs:simpleType name="FileExecutionType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="sql"/>
+            <xs:enumeration value="sqlParseAndExecute"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="FileNameType">
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="FileType">
+        <xs:attribute name="type" type="FileExecutionType"/>
+        <xs:attribute name="file" type="FileNameType"/>
+    </xs:complexType>
+    
+    <xs:simpleType name="PropertiesFileType">
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="SubProjectDirectoryType">
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="SQLFileListType">
+        <xs:sequence>
+            <xs:element name="SqlFile" type="FileType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:element name="Project">
+        <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="purgeFile" type="FileType" minOccurs="0"/> 
+                    <xs:element name="Env" type="PropertiesFileType" minOccurs="1" maxOccurs="1"/>
+                    <xs:element name="Pre" type="SQLFileListType" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="Patches" type="SQLFileListType" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="Post" type="SQLFileListType" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+
+</xs:schema>

@@ -1,0 +1,19 @@
+{
+	"patch_schema": "version",
+	"patch_table": "db_patches",
+
+	"patches": [
+		"patch/init_badge.sql"
+	],
+
+	"alwaysrun": [
+		"sprocs/badge_register.sql",
+		"sprocs/badge_record_pairing.sql",
+		"sprocs/badge_data_by_account.sql",
+		"sprocs/badge_data_by_radio.sql"
+	],
+
+	"post": [
+		"utils/grants.sql"
+	]
+}

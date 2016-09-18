@@ -1,0 +1,5 @@
+#cloud-config
+manage_etc_hosts: localhost
+coreos:
+  update:
+    reboot-strategy: 'off'
