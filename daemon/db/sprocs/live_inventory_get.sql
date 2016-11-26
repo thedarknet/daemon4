@@ -13,7 +13,6 @@ returns
 AS $$
 declare
 	v_lang live.account.language_id%TYPE;
-	v_cur_event static.event.event_id%TYPE = live.get_current_event(p_account_id);
 BEGIN
 	select language_id into v_lang
 	from live.account
@@ -29,7 +28,8 @@ BEGIN
 		  , id.count
 		  , si.max_count
 		  , id.metadata
-		from live.inventory_details id
+		from live.get_current_events(p_account_id) ce, 
+		live.inventory_details id
 		inner join static.item si
 			on si.item_id = id.item_id
 		inner join live.inventory_bags b
@@ -38,6 +38,6 @@ BEGIN
 			on i.inventory_id = b.inventory_id
 		where i.account_id = p_account_id
 			and id.count > 0
-			and (b.event_id is null or b.event_id = v_cur_event));
+			and (b.event_id is null or b.event_id = ce.id));
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;

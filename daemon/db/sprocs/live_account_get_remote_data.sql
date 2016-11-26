@@ -12,7 +12,6 @@ returns
 
 AS $$
 declare
-	v_cur_event static.event.event_id%TYPE = live.get_current_event(p_account_id);
 BEGIN
 	return query (
 		select 
@@ -24,7 +23,8 @@ BEGIN
 		  , id.count
 		  , si.max_count
 		  , id.metadata
-		from live.inventory_details id
+		from live.get_current_events(p_account_id) ce,
+		live.inventory_details id
 		inner join static.item si
 			on si.item_id = id.item_id
 		inner join live.inventory_bags b
@@ -35,6 +35,6 @@ BEGIN
 			on a.account_id = i.account_id
 		where a.account_id = p_account_id
 			and (id.count > 0 or id.count is null)
-			and (b.event_id is null or b.event_id = v_cur_event));
+			and (b.event_id is null or b.event_id = ce.id));
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;

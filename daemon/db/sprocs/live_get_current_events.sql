@@ -1,4 +1,4 @@
-﻿create or replace function live.get_current_event( p_account_id live.account.account_id%TYPE )
+﻿create or replace function live.get_current_events( p_account_id live.account.account_id%TYPE )
 returns 
 	table ( id static.event.event_id%TYPE)
 AS $$

@@ -21,9 +21,6 @@ begin
 		set display_name = p_display_name || 'player' || v_account_id
 		where account_id = v_account_id and display_name = '';
 
-	-- get current event id
-	v_event_id = live.get_current_event(v_account_id);
-
 	-- create inventory
 	v_inventory_id = live.inventory_create(v_account_id);
 
@@ -31,7 +28,10 @@ begin
 	for v_bag_type in (select unnest(enum_range(NULL::static.inventory_bag_type)))
 	loop
 		perform live.inventory_bag_create(v_inventory_id, v_bag_type, null);
-		perform live.inventory_bag_create(v_inventory_id, v_bag_type, v_event_id);
+		for v_event_id in live.get_current_events(v_account_id)
+		loop
+			perform live.inventory_bag_create(v_inventory_id, v_bag_type, v_event_id);
+		end loop;
 	end loop;
 
 	return v_account_id;

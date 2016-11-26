@@ -68,7 +68,6 @@
 		"sprocs/live_start_quest_logic_group.sql",
 		"sprocs/live_complete_epic.sql",
 		"sprocs/live_get_inprogress_epics.sql",
-		"sprocs/live_get_current_event.sql",
 		"sprocs/live_get_current_events.sql",
 		"sprocs/live_grant_reward.sql",
 		"sprocs/live_account_get_remote_data.sql",

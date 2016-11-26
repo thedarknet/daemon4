@@ -4,7 +4,7 @@ returns
 AS $$
 declare
 	v_rec record;
-	v_event_id static.event.event_id%TYPE = live.get_current_event(p_account_id);
+	--TODO: THIS IS BROKEN currently we only put rewards into default bags...
 	v_old_count live.inventory_details.count%TYPE;
 	v_new_count live.inventory_details.count%TYPE;
 begin
