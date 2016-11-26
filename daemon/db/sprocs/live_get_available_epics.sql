@@ -32,8 +32,10 @@ begin
 		  , (select count(1) from live.epic le where le.epic_id = se.epic_id and le.complete_time is not null)::integer repeat_current
 		  , se.group_size
 		  , se.flags
-		from static.epic se
-		where (se.visibility_enum = 'ALWAYS' or se.visibility_enum = 'ELIGIBLE') and live.is_eligible_for_epic(p_account_id, se.epic_id, v_cur_time)
+		from static.epic se, static.event_epic ee
+		where (se.visibility_enum = 'ALWAYS' or se.visibility_enum = 'ELIGIBLE') 
+		and live.is_eligible_for_epic(p_account_id, se.epic_id, v_cur_time)
+		and ee.event_id = v_cur_event 
 	);
 end; $$
 language PLPGSQL security definer;
