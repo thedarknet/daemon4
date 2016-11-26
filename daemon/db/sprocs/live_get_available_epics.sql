@@ -37,6 +37,7 @@ begin
 		where (se.visibility_enum = 'ALWAYS' or se.visibility_enum = 'ELIGIBLE') 
 		and live.is_eligible_for_epic(p_account_id, se.epic_id, v_cur_time)
 		and ee.event_id = ce.id
+		and se.epic_id = ee.epic_id
 	);
 end; $$
 language PLPGSQL security definer;

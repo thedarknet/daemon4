@@ -28,7 +28,7 @@ begin
 	for v_bag_type in (select unnest(enum_range(NULL::static.inventory_bag_type)))
 	loop
 		perform live.inventory_bag_create(v_inventory_id, v_bag_type, null);
-		for v_event_id in live.get_current_events(v_account_id)
+		for v_event_id in (select live.get_current_events(v_account_id))
 		loop
 			perform live.inventory_bag_create(v_inventory_id, v_bag_type, v_event_id);
 		end loop;

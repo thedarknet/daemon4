@@ -75,7 +75,8 @@
 		"sprocs/live_account_set_type.sql",
 		"sprocs/live_account_get.sql",
 		"sprocs/live_get_completed_epics.sql",
-		"sprocs/live_get_completed_epic_details.sql"
+		"sprocs/live_get_completed_epic_details.sql",
+		"sprocs/live_account_entitlement_create.sql"
 	],
 
 	"post": [
