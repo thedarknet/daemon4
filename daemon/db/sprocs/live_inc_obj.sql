@@ -1,4 +1,4 @@
-create or replace function live.inc_obj_by_code ( p_account_id live.account.account_id%TYPE, p_code text )
+create or replace function live.inc_obj_by_code ( p_account_id live.account.account_id%TYPE, p_code text, p_live_epic_id live.epic.live_epic_id%TYPE, p_live_quest_id live.quest.live_quest_id%TYPE, p_live_objective_id live.objective.live_objective_id%TYPE )
 returns 
 	TABLE(
 		  live_objective_id live.objective.live_objective_id%TYPE
@@ -32,6 +32,9 @@ begin
 	             inner join live.objective o on o.live_quest_id = q.live_quest_id
 	             inner join static.objective so on so.objective_id = o.objective_id
 	             where e.account_id = p_account_id
+					   and q.live_epic_id = COALESCE(p_live_epic_id,q.live_epic_id)
+					   and o.live_quest_id = COALESCE(p_live_quest_id, o.live_quest_id)
+					   and o.live_objective_id = COALESCE(p_live_objective_id, o.live_objective_id)
 	               and (p_code ~* so.activation_regex)
 	               and o.complete_time is null
 	               and o.fail_time is null

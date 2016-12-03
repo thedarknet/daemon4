@@ -208,9 +208,9 @@ func (s *serviceDB) StartEpic(accountID int64, epicID *int64, code *string) ([]E
 }
 
 // IncObj attempts to increment objectives based on a code
-func (s *serviceDB) IncObj(accountID int64, code string) ([]Event, []IncObjResult, error) {
+func (s *serviceDB) IncObj(accountID int64, code string, lepicId string, lquestId string, lobjId string) ([]Event, []IncObjResult, error) {
 	log.Printf("Calling inc_obj_for_code with %d, %s.", accountID, code)
-	rows, err := s.db.Query("SELECT * FROM live.inc_obj_by_code($1, $2)", accountID, code)
+	rows, err := s.db.Query("SELECT * FROM live.inc_obj_by_code($1, $2, $3, $4, $5)", accountID, code, lepicId, lquestId, lobjId)
 	if err != nil {
 		return nil, nil, newError(err)
 	}

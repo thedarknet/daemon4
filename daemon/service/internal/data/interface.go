@@ -13,6 +13,6 @@ type Database interface {
 	GetCompletedEpics(accountID int64) ([]CompletedEpic, DBError)
 	GetCompletedEpicDetails(accountID int64, liveEpicID int64) ([]CompletedQuest, DBError)
 	StartEpic(accountID int64, epicID *int64, code *string) ([]Event, []AvailableEpic, []InProgressEpic, DBError)
-	IncObj(accountID int64, code string) ([]Event, []IncObjResult, error)
+	IncObj(accountID int64, code string, lepicId string, lquestId string, lobjId string) ([]Event, []IncObjResult, error)
 	GetInventory(accountID int64) (*Inventory, error)
 }

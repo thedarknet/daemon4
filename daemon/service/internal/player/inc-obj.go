@@ -18,7 +18,10 @@ func init() {
 }
 
 type IncObjData struct {
-	Code string `json:"code"`
+	Code      string `json:"code"`
+	LiveEpic  string `json:"lepic"`
+	LiveQuest string `json:"lquest"`
+	LiveObj   string `json:"lobj"`
 }
 
 type IncObjErrorData struct {
@@ -33,7 +36,7 @@ type IncObjSuccessData struct {
 
 func (p *Player) IncObj(msgID *string, d *IncObjData) error {
 	log.Printf("incObj received from %d", p.ID)
-	events, results, err := p.db.IncObj(p.ID, d.Code)
+	events, results, err := p.db.IncObj(p.ID, d.Code, d.LiveEpic, d.LiveQuest, d.LiveObj)
 	if err != nil {
 		log.Printf("Unable to increment objectives for %d with %s (%v)", p.ID, d.Code, err)
 		return p.SendMessage(msgID, incObjErrorType, IncObjErrorData{Type: "SERVER_ERROR"})
